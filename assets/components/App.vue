@@ -1,13 +1,20 @@
 <template>
-  <h1 class="text-primary">{{name}}</h1>
+    <div class="content">
+        <div class="container">
+            <CardRow/>
+        </div>
+    </div>
 </template>
 
 <script>
+import CardRow from './CardRow.vue'
 export default {
     data() {
         return{
-            name: 'test'
         }
+    },
+    components: {
+        CardRow
     }
 }
 </script>
