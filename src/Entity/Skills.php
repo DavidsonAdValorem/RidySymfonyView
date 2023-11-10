@@ -17,23 +17,32 @@ class Skills
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank]
+    #[Assert\Length(min: 5)]
     private ?string $name = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 10)]
     private ?string $description = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank]
+    #[Assert\Length(min: 5)]
     private ?string $type = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank]
+    #[Assert\Length(min: 5)]
     private ?string $side = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank]
+    #[Assert\Range(max: 100, min: 5)]
     private ?int $level = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 5)]
     private ?string $urlImg = null;
 
     public function getId(): ?int
