@@ -4,14 +4,15 @@
             <p class="h2">Add new skills</p>
         </div>
         <div class="border border-2 rounded p-4">
-            <form action="">
-                <Input label="Name" type="input" id="name" caption="Enter the skills name" />
-                <Input label="Url Image" type="input" id="ImgUrl" caption="Enter the skill picture Url" />
-                <Input label="Level" type="number" id="level" caption="Enter your skill level" />
-                <Select />
-                <TextArea label="Skill description" id="level" />
+            <form action="/api/CreateSkill" method="POST">
+                <InputForm label="Name" type="input" id="name" name="name" caption="Enter the skills name" />
+                <InputForm label="Url Image" type="input" id="img" name="img" caption="Enter the skill picture Url" />
+                <InputForm label="Level" type="number" id="level" name="level" caption="Enter your skill level" />
+                <InputForm label="Side" type="input" id="side" name="side" caption="Enter your skill level" />
+                <Select name="type" />
+                <TextArea label="Skill description" id="desc"  name="desc"/>
                 <div class="d-grid gap-2 col-12 mx-auto submit-button">
-                    <button type="button" class="btn btn-primary btn-lg">Add skill</button>
+                    <button type="submit" class="btn btn-primary btn-lg">Add skill</button>
                 </div>
             </form>
         </div>
@@ -19,12 +20,12 @@
 </template>
 
 <script>
-    import Input from './Input.vue'
+    import InputForm from './Input.vue'
     import TextArea from './TextArea.vue'
     import Select from './Select.vue'
     export default {
         components: {
-            Input,
+            InputForm,
             Select,
             TextArea,
         }

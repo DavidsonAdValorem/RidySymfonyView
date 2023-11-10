@@ -1,56 +1,55 @@
 <template>
+    <div>
   <div class="card">
-                            <a class="img-card" href="http://www.fostrap.com/2016/03/bootstrap-3-carousel-fade-effect.html">
-                            <img src="https://1.bp.blogspot.com/-Bii3S69BdjQ/VtdOpIi4aoI/AAAAAAAABlk/F0z23Yr59f0/s640/cover.jpg" />
-                          </a>
-                            <div class="card-content">
-                                <h4 class="card-title"> Bootstrap 3 Carousel FadeIn Out Effect</h4>
-                                <p class="">
-                                    Tutorial to make a carousel bootstrap by adding more wonderful effect fadein ...
-                                </p>
-                            </div>
-                            <div class="card-read-more">
-                                    Read More
-                            </div>
-                        </div>
+    <div class="img-card">
+
+        <img :src="url" />
+    </div>
+    <div class="card-content">
+        <h4 class="card-title h2">{{name}}</h4>
+        <p class="">{{ reduiceDesc }} </p>
+    </div>
+    <div class="card-read-more">
+        Read More
+    </div>
+</div>
+</div>
 </template>
 
 <script>
 export default {
-
+    props: {
+        id: Number,
+        name: String,
+        desc: String,
+        type: String,
+        side: String,
+        url: String,
+        level: Number
+    },
+    computed: {
+        reduiceDesc () {
+            if (this.$props.desc.length > 250) {
+                return this.$props.desc.substring(0, 250) + "...";
+            } else {
+                return this.$props.desc
+            }
+        }
+    }
 }
 </script>
 
 <style>
 
-h1.heading {
-  color: #fff;
-  font-size: 1.15em;
-  font-weight: 900;
+h4.card-title {
   margin: 0 0 0.5em;
   color: #505050;
-}
-@media (min-width: 450px) {
-  h1.heading {
-    font-size: 3.55em;
-  }
-}
-@media (min-width: 760px) {
-  h1.heading {
-    font-size: 3.05em;
-  }
-}
-@media (min-width: 900px) {
-  h1.heading {
-    font-size: 3.25em;
-    margin: 0 0 0.3em;
-  }
 }
 .card {
   display: block; 
     margin-bottom: 20px;
     line-height: 1.42857143;
-    background-color: #fff;
+    background-color: #ffffffb4;
     border-radius: 2px;
     text-align: center;
     box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12); 
@@ -82,7 +81,7 @@ h1.heading {
   font-weight: 700;
   font-size: 1.65em;
 }
-.card-title a {
+.card-title p {
   color: #000;
   text-decoration: none !important;
 }
@@ -92,6 +91,9 @@ h1.heading {
   text-decoration: none !important;
   padding:10px;
   font-weight:600;
-  text-transform: uppercase
+  text-transform: uppercase;
+}
+.card-read-more:hover {
+    cursor: pointer;
 }
 </style>
