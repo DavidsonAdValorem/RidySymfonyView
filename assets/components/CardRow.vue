@@ -1,17 +1,18 @@
 <template>
     <div class="row d-flex">
-            <div  class="col-md-4 my-5" v-for="skill in skills" :key="skill.id">
-                <Card :name="skill.name" :desc="skill.description" :url="skill.urlImg"/>
+        <h1 class="h1 my-5">All Skills</h1>
+            <div  class="col-md-4 my-3" v-for="skill in skills" :key="skill.id">
+                <Card @editSkill="handleEditSkill" @getSkills="getSkills" :skill="skill"/>
             </div>
         </div>
 </template>
 
 <script>
+import { getSkills } from '../utils';
 import Card from './Card.vue'
-import axios from 'axios';
 export default {
     components: {
-        Card
+        Card,
     },
     data() {
         return {
@@ -19,21 +20,20 @@ export default {
         };
     },
     methods: {
-        getSkills () {
-            axios.get("/api/getSkills")
-            .then((response) => {
-                this.skills = response.data;
-                console.log(response.data[0])
-            })
-            .catch((error) => {
-                console.error('Error fetching data skills:', error);
-            });
+        async getSkills () {
+            this.skills = await getSkills();
+        }, 
+        handleEditSkill(skill) {
+                //remonte data to App
+            this.$emit('editSkillMode', skill);
         }
+
     },
 
     beforeMount(){
         this.getSkills();
-    }
+        console.log(this.skills)
+    },
 
 }
 </script>

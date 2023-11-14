@@ -3,10 +3,10 @@
         <div class="card">
             <div class="img-card">
 
-                <img :src="url" />
+                <img :src="skill.urlImg" />
             </div>
             <div class="card-content">
-                <h4 class="card-title h2">{{name}}</h4>
+                <h4 class="card-title h2">{{skill.name}}</h4>
                 <p class="">{{ reduiceDesc }} </p>
             </div>
             <div class="card-read-more">
@@ -15,10 +15,10 @@
                         <button class="btn btn-primary"> Read More</button>
                     </div>
                     <div class="button-menu col-md-6 text-end">
-                        <button class="btn btn-danger">
+                        <button class="btn btn-danger" @click="deleteSkill(skill.id)">
                             delete
                         </button>
-                        <button class="btn btn-info">
+                        <button class="btn btn-info" @click="emitEditSkill">
                             edit
                         </button>
                     </div>
@@ -29,22 +29,38 @@
 </template>
 
 <script>
+    import { deleteSkill, getSkills } from '../utils';
     export default {
         props: {
-            id: Number,
-            name: String,
-            desc: String,
-            type: String,
-            side: String,
-            url: String,
-            level: Number
+            skill: Object,
         },
+        data() {
+            return {
+                card: this.$props.skill,
+            }
+        },
+
+        methods: {
+            deleteSkill(id) {
+                deleteSkill(id).then(() => {
+                    this.$emit('getSkills')
+                })
+            },
+
+            emitEditSkill() {
+                const skill = this.skill
+                this.$emit('editSkill', skill);
+                console.log("emitEditSkill", skill)
+            }
+        },
+
+
         computed: {
             reduiceDesc() {
-                if (this.$props.desc.length > 250) {
-                    return this.$props.desc.substring(0, 250) + "...";
+                if (this.skill.description.length > 250) {
+                    return this.skill.description.substring(0, 250) + "...";
                 } else {
-                    return this.$props.desc
+                    return this.skill.description
                 }
             }
         }
