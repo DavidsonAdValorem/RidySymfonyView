@@ -6,7 +6,7 @@ Installation:
   -install js dependencies: npm install
 
 Run Application:
-  -start symfony server: php bin/console server:start (that open app to default local port)
+  -start symfony server: symfony server:start (that open app to default local port)
   -start build js: npm run watch
 
 Config database:
