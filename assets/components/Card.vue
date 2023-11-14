@@ -12,7 +12,7 @@
             <div class="card-read-more">
                 <div class="row">
                     <div class="col-md-6 text-start">
-                        <button class="btn btn-primary"> Read More</button>
+                        <button class="btn btn-primary" @click="emitViewSkill"> Read More</button>
                     </div>
                     <div class="button-menu col-md-6 text-end">
                         <button class="btn btn-danger" @click="deleteSkill(skill.id)">
@@ -47,10 +47,16 @@
                 })
             },
 
+            emitViewSkill() {
+                //remonte data to cardRow
+                const data = this.skill
+                this.$emit('viewSkill', data);
+            },
+
             emitEditSkill() {
+                //remonte data to cardRow
                 const skill = this.skill
                 this.$emit('editSkill', skill);
-                console.log("emitEditSkill", skill)
             }
         },
 

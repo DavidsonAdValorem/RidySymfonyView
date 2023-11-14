@@ -1,7 +1,7 @@
 <template>
     <div class="col-md-6 mx-auto my-form">
         <div class="form-title">
-            <h1 class="h1 my-5">Add new skills</h1>
+            <h1 class="h1 my-5">{{formMode}} Skill</h1>
         </div>
         <div class="border border-2 rounded p-4">
             <form action="" @submit.prevent="handleSubmit">
@@ -46,7 +46,7 @@
                                 </span>
                             </span>
                             <span v-else>
-                                Add skill 
+                                {{formMode}} Skill 
                             </span>
                         </button>
                     </div>
@@ -64,6 +64,7 @@
         },
         data() {
             return {
+                submitButton: "Add new ",
                 loading: false,
                 formData: this.$props.formData,
                 selectValue: ["Programming Language", "Framework", "Others"]
@@ -102,6 +103,14 @@
                console.log('Click event prevented');
             }
         }, 
+        computed: {
+            formMode(){
+                if(this.formData.id){
+                    this.submitButton = "Edit "
+                }
+                return this.submitButton
+            }
+        }
     }
 </script>
 
