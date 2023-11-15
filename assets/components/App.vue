@@ -2,16 +2,19 @@
     <div class="content">
         <HeaderNav :active="needForm" @switchPageFromNav="switchPage"/>
         <div class="container">
+            <div v-if="alert != null">
+                <Alert :alert="alert" @handleAlertMode="handleAlert"/>
+            </div>
             <div class="my-5">
                 <div v-if="viewSkill">
                     <ViewSkill :skill="skill" @viewSkillMode="handleViewSkill"/>
                 </div>
                 <div v-else>
                     <div v-if="needForm">
-                        <SkillForm :formData="skill"/>
+                        <SkillForm :formData="skill" @handleAlertMode="handleAlert"/>
                     </div>
                     <div v-else>
-                        <CardRow  @viewSkillMode="handleViewSkill"  @editSkillMode="handleEditSkillFromCardRow"/>
+                        <CardRow  @viewSkillMode="handleViewSkill" @handleAlertMode="handleAlert" @editSkillMode="handleEditSkillFromCardRow"/>
                     </div>
                 </div>
         </div>
@@ -22,6 +25,7 @@
 <script>
 import ViewSkill from './ViewSkill.vue'
 import HeaderNav from './Header.vue'
+import Alert from './Alert.vue'
 import CardRow from './CardRow.vue'
 import SkillForm from './SkillForm.vue'
 export default {
@@ -29,12 +33,14 @@ export default {
         return{
             needForm : false,
             skill: {},
-            viewSkill: null
+            viewSkill: null,
+            alert: null
         }
     },
     components: {
         CardRow,
         HeaderNav,
+        Alert,
         SkillForm,
         ViewSkill
     },
@@ -59,11 +65,14 @@ export default {
             }else{
                 this.viewSkill = null
             }
-                
         },
         setSkill (data) {
             //change needForm
             this.skill = data
+        },
+        handleAlert(data){
+            //get alert
+            this.alert = data
         },
 
     },

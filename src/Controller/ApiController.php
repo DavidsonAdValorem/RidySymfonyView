@@ -41,7 +41,11 @@ class ApiController extends AbstractController
         $skill = $skRepo->find($id);
         //verify skill exist
         if (!$skill) {
-            return new JsonResponse(['message' => 'skill not found'], 403, []);
+            $json = [
+                'success' => false,
+                'message' => 'Any skill not found, please create new skill'
+            ];
+            return new JsonResponse($json, 403, []);
         }
         //get all data in request
         $data = json_decode($request->getContent(), true);
@@ -62,10 +66,14 @@ class ApiController extends AbstractController
         //save skill
         $em->persist($skill);
         $em->flush();
-        //redirect to home
-        return $this->redirectToRoute('app_home');
 
-        return new JsonResponse(['message' => 'skill updated successfully'], 200, []);
+
+        $json = [
+            'success' => true,
+            'message' => 'Skill updated successfully'
+        ];
+
+        return new JsonResponse($json, 200, []);
     }
 
     #[Route('/api/skill/delete/{id}', name: 'app_delete_skill', methods: 'DELETE')]
@@ -78,7 +86,8 @@ class ApiController extends AbstractController
         $em->remove($skill);
         $em->flush();
         $json = [
-            'message' => 'delete successfully'
+            'success' => true,
+            'message' => 'Skill deleted successfully'
         ];
         return new JsonResponse($json, 200, []);
     }
@@ -107,8 +116,10 @@ class ApiController extends AbstractController
         //save skill
         $em->persist($skill);
         $em->flush();
+
         $json = [
-            'message' => 'created successfully'
+            'success' => true,
+            'message' => 'Skill created successfully'
         ];
         return new JsonResponse($json, 201, []);
     }

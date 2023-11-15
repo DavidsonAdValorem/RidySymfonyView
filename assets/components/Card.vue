@@ -42,8 +42,9 @@
 
         methods: {
             deleteSkill(id) {
-                deleteSkill(id).then(() => {
+                deleteSkill(id).then((response) => {
                     this.$emit('getSkills')
+                    this.$emit('alert', response)
                 })
             },
 

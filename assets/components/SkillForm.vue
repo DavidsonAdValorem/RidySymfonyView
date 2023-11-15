@@ -73,13 +73,17 @@
         methods: {
             async createSkill () {
                 this.loading = true
-                const response = await createSkill(this.formData);
+                await createSkill(this.formData).then((response) =>{
+                    this.$emit('handleAlertMode', response)
+                });
                 this.formData = {}
                 this.loading = false
             },
             async editSkill () {
                 this.loading = true
-                const response = await editSkill(this.formData.id, this.formData);
+                await editSkill(this.formData.id, this.formData).then((response) =>{
+                    this.$emit('handleAlertMode', response)
+                });
                 this.loading = false
             },
             switchLoading(){
