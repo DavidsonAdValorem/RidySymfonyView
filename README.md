@@ -31,6 +31,12 @@ Config database:
   
   -make migration: php bin/console doctrine:migrations:migrate
   
-  -create fixture on database:  php bin/console doctrine:fixtures:load
+  -create fixture on database:  php bin/console doctrine:fixtures:load (this commande will create 3 skills in your database and can view it on skills page)
 
-  
+Description:
+
+This application was developed for create, read, update and delete skill* card who contains the descprition, level, and others information about the skill. To create skill in the app, install project, run it locally following the instructions above, go to the form page and complete fields. Yon can see your new skill created in the skills page. Each skill create can be modified and removed with button. You can also view in details on click more button, it show a modal content all information about the skill. 
+
+Note:
+
+*On this project skill is generaly based on web dev such as an language, framework, tech, etc... 
